@@ -1,0 +1,55 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  width: fit-content;
+  margin: 80px auto 0;
+}
+
+.field {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border: 1px solid darkgray;
+  background: #ece5e5;
+}
+
+.pressed {
+  background: #e6d9d9;
+}
+
+.unrevealed {
+  color: rgba(0, 0, 0, 0) !important;
+  background: lightgray;
+}
+
+.unrevealed:hover {
+  background: #e6d9d9;
+}
+
+.unrevealed.flagged {
+  background-color: lightgray;
+  background-image: url(../images/flagpng.png);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.floater-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  position: absolute;
+  top: 20px;
+  color: red;
+  font-size: 32px;
+  width: 420px;
+}
+
+.floater-right {
+  text-align: right;
+}
+
+.floater-mid {
+  text-align: center;
+  cursor: pointer;
+}
