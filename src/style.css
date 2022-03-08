@@ -92,6 +92,7 @@ body {
   color: var(--color-primary);
   font-size: 32px;
   width: 420px;
+  padding: 10px 0;
 }
 
 .floater-wrapper-bottom {
