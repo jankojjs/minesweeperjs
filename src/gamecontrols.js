@@ -1,7 +1,7 @@
 // Create top controls
 const topWrapper = document.createElement("div");
 topWrapper.classList.add("floater-wrapper");
-canvas.appendChild(topWrapper);
+canvas.prepend(topWrapper);
 
 const bombCounterDiv = document.createElement("div");
 bombCounterDiv.classList.add("floater");
