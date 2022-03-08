@@ -12,10 +12,15 @@ let flagged = [];
 let revealed = [];
 let valued = [];
 
+// Create card
+const card = document.createElement("div");
+card.classList.add("card");
+document.body.appendChild(card);
+
 // Create canvas
 const canvas = document.createElement("div");
 canvas.setAttribute("id", "canvas");
-document.body.appendChild(canvas);
+card.appendChild(canvas);
 
 // Create board
 const board = document.createElement("div");
@@ -187,53 +192,6 @@ function endScreen(screenMsg) {
   gameRunning = false;
 }
 
-const topWrapper = document.createElement("div");
-topWrapper.classList.add("floater-wrapper");
-board.appendChild(topWrapper);
-
-const bombCounterDiv = document.createElement("div");
-bombCounterDiv.classList.add("floater");
-bombCounterDiv.innerHTML = bombs.length;
-topWrapper.appendChild(bombCounterDiv);
-
-const refreshIconDiv = document.createElement("div");
-refreshIconDiv.classList.add("floater-mid");
-refreshIconDiv.innerHTML = "😃";
-topWrapper.appendChild(refreshIconDiv);
-refreshIconDiv.addEventListener("click", () => {
-  window.top.location.reload(true);
-});
-
-const timerDiv = document.createElement("div");
-timerDiv.classList.add("floater-right");
-timerDiv.innerHTML = 999;
-topWrapper.appendChild(timerDiv);
-
-function changeSmileyOnClick() {
-  refreshIconDiv.innerHTML = "😜";
-  setTimeout(function () {
-    refreshIconDiv.innerHTML = "😃";
-  }, 300);
+function toggleTheme() {
+  document.querySelector(":root").classList.toggle("dark");
 }
-
-function timer() {
-  timerDiv.innerHTML = parseInt(timerDiv.innerHTML) + 1;
-  if (parseInt(timerDiv.innerHTML) < 10) {
-    timerDiv.innerHTML = "00" + timerDiv.innerHTML;
-    return;
-  }
-  if (parseInt(timerDiv.innerHTML) < 100) {
-    timerDiv.innerHTML = "0" + timerDiv.innerHTML;
-    return;
-  }
-}
-
-canvas.addEventListener("click", () => {
-  if (firstClick) {
-    timerDiv.innerHTML = "000";
-    setInterval(function () {
-      firstClick = false;
-      gameRunning && timer();
-    }, 1000);
-  }
-});
