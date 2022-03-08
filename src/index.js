@@ -6,7 +6,7 @@ app.on("web-contents-created", (e, contents) => {
   contextMenu({
     // window: contents,
     showSaveImageAs: true,
-    showInspectElement: false,
+    showInspectElement: true,
   });
 });
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -18,8 +18,8 @@ if (require("electron-squirrel-startup")) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 475,
-    height: 530,
+    width: 520,
+    height: 600,
   });
 
   // and load the index.html of the app.
