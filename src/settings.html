@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,23 @@
     <title>⚙️ MinesweeperJS | Settings</title>
     <link href="style.css" rel="stylesheet" />
 </head>
+
 <body>
     <div class="card">
         <h1>Settings</h1>
         <input type="number" id="input" />
         <a href="index.html">Back</a>
+        <div id="options">
+            <label class="radio" for="themeToggle">
+                <input class="radio__toggle" id="themeToggle" type="checkbox" onchange="emitThemeChange()">
+                <span class="radio__span">
+                    Dark theme
+                </span>
+            </label>
+        </div>
     </div>
 
     <script src="settings.js"></script>
 </body>
+
 </html>

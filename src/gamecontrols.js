@@ -1,7 +1,7 @@
 // Create top controls
 const topWrapper = document.createElement("div");
 topWrapper.classList.add("floater-wrapper");
-canvas.appendChild(topWrapper);
+canvas.prepend(topWrapper);
 
 const bombCounterDiv = document.createElement("div");
 bombCounterDiv.classList.add("floater");
@@ -67,7 +67,6 @@ versionDiv.classList.add("floater-mid");
 versionDiv.classList.add("floater-small");
 versionDiv.innerHTML = "ver 1.0.2";
 bottomWrapper.appendChild(versionDiv);
-versionDiv.addEventListener("click", toggleTheme);
 
 const settingsDiv = document.createElement("a");
 settingsDiv.classList.add("floater-right");
