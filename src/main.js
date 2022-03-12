@@ -192,6 +192,12 @@ function endScreen(screenMsg) {
   gameRunning = false;
 }
 
-function toggleTheme() {
-  document.querySelector(":root").classList.toggle("dark");
+/** Set theme */
+function setTheme() {
+  let currentTheme = localStorage.getItem('theme');
+  if (!currentTheme) currentTheme = 'light';
+  if (currentTheme === 'light') document.querySelector(":root").classList.add("dark");
+  if (currentTheme === 'dark') document.querySelector(":root").classList.remove("dark");
 }
+
+setTheme();
