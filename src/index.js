@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const contextMenu = require("electron-context-menu");
 
@@ -20,6 +20,13 @@ const createWindow = () => {
   const mainWindow = new BrowserWindow({
     width: 520,
     height: 595,
+    minWidth: 520,
+    minHeight: 595,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: true,
+    }
   });
 
   // and load the index.html of the app.
@@ -54,3 +61,9 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+// Expose this on the other thread
+ipcMain.on('resize-window', (event, width, height) => {
+  let browserWindow = BrowserWindow.fromWebContents(event.sender)
+  browserWindow.setSize(width, height)
+})

@@ -1,6 +1,24 @@
+const { ipcRenderer } = require('electron');
+let COLS, ROWS;
+const GAMEMODE = localStorage.getItem('gamemode');
+switch (GAMEMODE) {
+  case 'medium':
+    COLS = 20;
+    ROWS = 10;
+    ipcRenderer.send('resize-window', 940, 595)
+    break;
+  case 'hard':
+    COLS = 30;
+    ROWS = 15;
+    ipcRenderer.send('resize-window', 1380, 800)
+    break;
+  default:
+    COLS = 10;
+    ROWS = 10;
+    ipcRenderer.send('resize-window', 520, 595)
+}
+
 // Initial settings
-const COLS = 10;
-const ROWS = 10;
 const PX = 40;
 const COLORS = ["rainbow", "blue", "green", "red", "darkblue"];
 
@@ -25,6 +43,7 @@ card.appendChild(canvas);
 // Create board
 const board = document.createElement("div");
 board.setAttribute("id", "board");
+board.style = `grid-template-columns: repeat(${COLS}, 1fr)`;
 canvas.appendChild(board);
 
 // Style board
@@ -72,7 +91,10 @@ for (let i = 0; i < ROWS; i++) {
               field.classList.add("flagged");
               flagged.push(field.getAttribute("id"));
               bombCounterDiv.innerHTML = parseInt(bombCounterDiv.innerHTML) - 1;
-              winCheck() && endScreen("You Win!");
+              if (winCheck()) {
+                showYouWin();
+                createFireworks();
+              }
             }
           } else {
             let classIndex = flagged.indexOf(field.getAttribute("id"));
@@ -184,7 +206,7 @@ function winCheck() {
 }
 
 function endScreen(screenMsg) {
-  alert(screenMsg);
+  screenMsg && alert(screenMsg);
   let unrevealeds = Array.from(document.querySelectorAll(".unrevealed"));
   unrevealeds.map((item) => {
     item.classList.remove("unrevealed");
@@ -201,3 +223,23 @@ function setTheme() {
 }
 
 setTheme();
+
+function showYouWin() {
+  const youWin = document.createElement('div');
+  youWin.innerHTML = "You Win";
+  youWin.classList.add('you-win');
+  document.body.appendChild(youWin);
+  endScreen();
+}
+
+function createFireworks() {
+  const pyro = document.createElement('div');
+  pyro.classList.add('pyro');
+  const pyroBefore = document.createElement('div');
+  pyroBefore.classList.add('before');
+  const pyroAfter = document.createElement('div');
+  pyroAfter.classList.add('after');
+  document.body.appendChild(pyro);
+  pyro.appendChild(pyroBefore);
+  pyro.appendChild(pyroAfter);
+}

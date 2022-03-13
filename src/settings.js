@@ -29,3 +29,20 @@ function emitThemeChange() {
     toggleTheme();
     setTheme()
 }
+
+
+/**
+ * Gamemode selection
+ */
+const select = document.getElementById('select_gamemode');
+initGamemodeValue();
+let gamemode = localStorage.getItem('gamemode');
+
+select.addEventListener('change', () => {
+    localStorage.setItem('gamemode', select.value);
+})
+
+function initGamemodeValue() {
+    let initGamemode = localStorage.getItem('gamemode');
+    if (initGamemode) select.value = initGamemode;
+}
