@@ -1,6 +1,24 @@
+const { ipcRenderer } = require('electron');
+let COLS, ROWS;
+const GAMEMODE = localStorage.getItem('gamemode');
+switch (GAMEMODE) {
+  case 'medium':
+    COLS = 20;
+    ROWS = 10;
+    ipcRenderer.send('resize-window', 940, 595)
+    break;
+  case 'hard':
+    COLS = 30;
+    ROWS = 15;
+    ipcRenderer.send('resize-window', 1380, 800)
+    break;
+  default:
+    COLS = 10;
+    ROWS = 10;
+    ipcRenderer.send('resize-window', 520, 595)
+}
+
 // Initial settings
-const COLS = 10;
-const ROWS = 10;
 const PX = 40;
 const COLORS = ["rainbow", "blue", "green", "red", "darkblue"];
 
@@ -188,7 +206,7 @@ function winCheck() {
 }
 
 function endScreen(screenMsg) {
-  alert(screenMsg);
+  screenMsg && alert(screenMsg);
   let unrevealeds = Array.from(document.querySelectorAll(".unrevealed"));
   unrevealeds.map((item) => {
     item.classList.remove("unrevealed");
@@ -211,6 +229,7 @@ function showYouWin() {
   youWin.innerHTML = "You Win";
   youWin.classList.add('you-win');
   document.body.appendChild(youWin);
+  endScreen();
 }
 
 function createFireworks() {

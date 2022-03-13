@@ -11,15 +11,23 @@
 
 <body>
     <div class="card">
-        <h1>Settings</h1>
-        <input type="number" id="input" />
-        <a href="index.html">Back</a>
+        <h1 class="headline-primary">Settings</h1>
+        <a href="index.html" class="go-back">⬅ Back</a>
         <div id="options">
             <label class="radio" for="themeToggle">
                 <input class="radio__toggle" id="themeToggle" type="checkbox" onchange="emitThemeChange()">
                 <span class="radio__span">
                     Dark theme
                 </span>
+            </label>
+            <label class="select_label" for="select_gamemode"><span class="radio__span">
+                    Choose gamemode
+                </span>
+                <select name="select_gamemode" id="select_gamemode">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
             </label>
         </div>
     </div>
